@@ -105,3 +105,4 @@ venv.bak/
 
 secrets.json
 dump_bill_for_test.json
+docker-compose.prod.yml
