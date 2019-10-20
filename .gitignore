@@ -104,3 +104,4 @@ venv.bak/
 .mypy_cache/
 
 secrets.json
+dump_bill_for_test.json

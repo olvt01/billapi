@@ -36,3 +36,47 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
+
+
+class Bill(models.Model):
+    bill = models.CharField(max_length=80, blank=True)
+
+    class Meta:
+        db_table = 'bill'
+
+    def __str__(self):
+        return self.bill
+
+
+class Billview(models.Model):
+    billno = models.IntegerField(primary_key=True)
+    billname = models.CharField(max_length=80, blank=True, null=True)
+    billlink = models.CharField(max_length=34, blank=True, null=True)
+    proposerkind = models.CharField(max_length=10, blank=True, null=True)
+    proposerdt = models.CharField(max_length=10, blank=True, null=True)
+    submitdt = models.CharField(max_length=10, blank=True, null=True)
+    committeename = models.CharField(max_length=20, blank=True, null=True)
+    procdt = models.CharField(max_length=10, blank=True, null=True)
+    generalresult = models.CharField(max_length=10, blank=True, null=True)
+    summarycontent = models.TextField(blank=True, null=True)
+    billstep = models.CharField(max_length=10, blank=True, null=True)
+    finished = models.BooleanField(blank=True, null=True)
+    done = models.BooleanField(blank=True, null=True)
+    coactors = models.TextField(blank=True, null=True)
+    billid = models.ForeignKey(Bill, models.DO_NOTHING,
+                               db_column='billid', blank=True)
+
+    class Meta:
+        db_table = 'billview'
+
+
+class Subscribe(models.Model):
+    """User can subscribe a bill"""
+    subscribe_bill = models.ForeignKey(Bill, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return str(self.subscribe_bill)
