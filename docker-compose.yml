@@ -17,7 +17,7 @@ services:
       - DB_HOST=db
       - DB_NAME=app
       - DB_USER=postgres
-      - DB_PASS=devpassword
+      - DB_PASS=supersecretpassword
       - DEBUG=True
     depends_on:
       - db
@@ -29,4 +29,4 @@ services:
     environment:
       - POSTGRES_DB=app
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=devpassword
+      - POSTGRES_PASSWORD=supersecretpassword
