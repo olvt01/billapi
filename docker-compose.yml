@@ -19,6 +19,8 @@ services:
       - DB_USER=postgres
       - DB_PASS=supersecretpassword
       - DEBUG=True
+      - ALLOWED_HOSTS=*
+      - CORS_ORIGIN_WHITELIST=http://localhost:3000
     depends_on:
       - db
 
