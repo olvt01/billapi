@@ -3,7 +3,8 @@ bill api source code.
 
 ## API Specification
 
-|-|-|
+End point: http://ec2-13-209-42-228.ap-northeast-2.compute.amazonaws.com
+
 |-|-|
 |admin/ | |
 | api/user/create/ | |
