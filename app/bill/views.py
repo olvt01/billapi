@@ -1,29 +1,38 @@
 from rest_framework import viewsets, mixins
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.pagination import PageNumberPagination
 
 from core.models import Bill, Billview, Subscribe
 
 from bill import serializers
 
 
+class CustomPaginaction(PageNumberPagination):
+    page_size = 100
+    page_size_query_param = 'page_size'
+    max_page_size = 1000
+
+
 class BillViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
     """Manage Bills in the database"""
     queryset = Bill.objects.all()
     serializer_class = serializers.BillSerializer
+    pagination_class = CustomPaginaction
 
 
 class BillDetailViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
     """Manage Detailed Bills in the database"""
     queryset = Billview.objects.all()
     serializer_class = serializers.BillDetailSerializer
+    pagination_class = CustomPaginaction
 
     def _params_to_ints(self, qs):
         """Convert a list of string IDs to a list of integers"""
         return [int(str_id) for str_id in qs.split(',')]
 
     def get_queryset(self):
-        """Retrieve the recipes for the authenticated user"""
+        """Enable the id and committee params"""
         id = self.request.query_params.get('id')
         committee = self.request.query_params.get('committee')
         if id:
@@ -41,6 +50,7 @@ class SubscribeViewSet(viewsets.ModelViewSet):
 
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
+    pagination_class = CustomPaginaction
 
     def get_queryset(self):
         """Return objects for the current authenticated user only"""
