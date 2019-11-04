@@ -50,12 +50,11 @@ class SubscribeViewSet(viewsets.ModelViewSet):
 
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
-    pagination_class = CustomPaginaction
 
     def get_queryset(self):
         """Return objects for the current authenticated user only"""
 
-        return queryset.filter(
+        return self.queryset.filter(
             user=self.request.user
         ).order_by('-id').distinct()
 
