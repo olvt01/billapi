@@ -87,6 +87,7 @@ class Billview(models.Model):
     committee = models.ForeignKey(Committee, related_name='billviews', on_delete=models.CASCADE, blank=True)
     status = models.CharField(max_length=10, choices=STATUS_TYPE, default=NORMAL)
     alternative = models.ForeignKey('self', null=True, related_name='billviews', on_delete=models.SET_NULL)
+    lastupdated = models.CharField(max_length=10, blank=True, null=True)
 
     class Meta:
         db_table = 'billview'
