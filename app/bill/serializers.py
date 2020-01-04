@@ -49,7 +49,7 @@ class BillViewCoverSerializer(serializers.ModelSerializer):
     class Meta:
         model = Billview
         fields = ('billno', 'billname', 'billlink', 'generalresult', 'billstep',
-                  'proposerdt', 'submitdt', 'procdt', 'finished', 'committee_id')
+                  'lastupdated', 'finished', 'committee_id')
         read_only_Fields = ('id',)
 
 

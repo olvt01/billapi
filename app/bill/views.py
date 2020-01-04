@@ -105,7 +105,7 @@ class BillViewViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
         if generalresult:
             self.queryset = self.queryset.filter(generalresult=generalresult)
         if sortKey:
-            if sortKey=='billno':
+            if sortKey in ['billno', 'lastupdated']:
                 return self.queryset.order_by(f'-{sortKey}')
             return self.queryset.order_by(f'{sortKey}')
         return self.queryset.order_by('-billno')
