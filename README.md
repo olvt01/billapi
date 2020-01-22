@@ -10,18 +10,22 @@ End point: http://ec2-13-209-42-228.ap-northeast-2.compute.amazonaws.com
 | api/user/create/ | POST | Creating an user account |
 | api/user/token/ | POST | Obtaing a token for authentication |
 | api/user/me/ | GET, PUT, PATCH, HEAD | Managing an user |
-| api/bill/bills/ | GET | |
-| api/bill/bills_detail/ | GET | |
-| api/subscribes/ | | |
-| api/subscribes/{pk}/ | | |
-| api/bookmarks/ | | |
-| api/bookmarks/{pk} | | |
+| api/bill/bills/ | GET | Retrieving items / *Options for filtering & searching |
+| api/bill/bills_detail/ | GET | Retrieving items / *Options for filtering & searching |
+| api/subscribes/ | GET, POST | Creating or Retrieving user subscriptions |
+| api/subscribes/{pk}/ | GET, PUT, PATCH, DELETE | Managing user subscriptions |
+| api/bookmarks/ | GET, POST | Creating or Retrieving user bookmarks  |
+| api/bookmarks/{pk}/ | GET, PUT, PATCH, DELETE | Managing user bookmarks |
+
+### Options
+
+
 
 ## Skills
 
 - Python
 - Django
-- Django Rest Framwork
+- Django Rest Framework
 - PostgreSQL
 
 ## Deployment note
