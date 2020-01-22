@@ -1,7 +1,7 @@
 # django-bill-api
 bill api source code.
 
-## API Specification
+## API Specifications
 
 End point: http://ec2-13-209-42-228.ap-northeast-2.compute.amazonaws.com
 
@@ -16,10 +16,6 @@ End point: http://ec2-13-209-42-228.ap-northeast-2.compute.amazonaws.com
 | api/subscribes/{pk}/ | GET, PUT, PATCH, DELETE | Managing user subscriptions |
 | api/bookmarks/ | GET, POST | Creating or Retrieving user bookmarks  |
 | api/bookmarks/{pk}/ | GET, PUT, PATCH, DELETE | Managing user bookmarks |
-
-### Options
-
-
 
 ## Skills
 
