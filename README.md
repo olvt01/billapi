@@ -5,15 +5,24 @@ bill api source code.
 
 End point: http://ec2-13-209-42-228.ap-northeast-2.compute.amazonaws.com
 
-|-|-|
-|admin/ | |
-| api/user/create/ | |
-| api/user/token/ | |
-| api/user/me/ | |
-| api/bill/bills/ | |
-| api/bill/bills_detail/ | |
-| api/subscribes/ | |
-| api/subscribes/{pk}/ | |
+|Url|Method|Specification|
+|--|--|--|
+| api/user/create/ | POST | Creating an user account |
+| api/user/token/ | POST | Obtaing a token for authentication |
+| api/user/me/ | GET, PUT, PATCH, HEAD | Managing an user |
+| api/bill/bills/ | GET | |
+| api/bill/bills_detail/ | GET | |
+| api/subscribes/ | | |
+| api/subscribes/{pk}/ | | |
+| api/bookmarks/ | | |
+| api/bookmarks/{pk} | | |
+
+## Skills
+
+- Python
+- Django
+- Django Rest Framwork
+- PostgreSQL
 
 ## Deployment note
 
@@ -25,13 +34,15 @@ End point: http://ec2-13-209-42-228.ap-northeast-2.compute.amazonaws.com
 
 ### Installation
 
+```
 mkdir awslive && cd awslive
-git pull git clone https://github.com/olvt01/billapi .
+git clone https://github.com/olvt01/billapi .
 git checkout master
+```
 
 ### Configuration files for deployment (Manually added)
 
-awslive/docker-compose.prod.yml:
+1. awslive/docker-compose.prod.yml:
 ```yml
 version: '3'
 
@@ -54,7 +65,7 @@ services:
       sh -c  "python manage.py makemigrations &&
               python manage.py migrate &&
               python manage.py collectstatic --no-input &&
-              gunicorn --bind app.wsgi:application --reload --bind 0.0.0.0:8000"
+              gunicorn --bind 0.0.0.0:8000 app.wsgi"
     volumes:
       - ./app/:/usr/src/app/
       - static_volume:/usr/src/app/staticfiles
@@ -64,8 +75,9 @@ services:
       - DB_NAME=#####
       - DB_USER=#####
       - DB_PASS=#####
-      - ALLOWED_HOSTS=#####
       - DEBUG=False
+      - ALLOWED_HOSTS=#####
+      - CORS_ORIGIN_WHITELIST=#####
     networks:
       - backend_net
 
@@ -76,7 +88,7 @@ networks:
   backend_net:
 ```
 
-awslive/app/secrets.json:
+2. awslive/app/secrets.json:
 ```json
 {
   "SECRET_KEY": "DJANGO SECRET KEY"
@@ -84,9 +96,13 @@ awslive/app/secrets.json:
 ```
 
 ### Making images with Dockerfiles
+```
 docker build -t awslive-app app
 docker build -t awslive-nginx nginx
+```
 
 ### Deploying with Docker swarm
+```
 docker swarm init
 docker stack deploy -c docker-compose.prod.yml awslive
+```
